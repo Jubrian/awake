@@ -1,16 +1,20 @@
-{
-  "name": "nodejs-image-demo",
-  "version": "1.0.0",
-  "description": "nodejs image demo",
-  "author": "Sammy the Shark <sammy@example.com>",
-  "license": "MIT",
-  "main": "app.js",
-  "keywords": [
-    "nodejs",
-    "bootstrap",
-    "express"
-  ],
-  "dependencies": {
-    "express": "^4.16.4"
-  }
-}
+# Use an official Node.js runtime as a parent image
+FROM node:18
+
+# Create and set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Define the command to run the app
+CMD ["node", "index.js"]
